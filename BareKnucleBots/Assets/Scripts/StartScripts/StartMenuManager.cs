@@ -17,6 +17,11 @@ public class StartMenuManager : MonoBehaviour
         UIPanels[0].SetActive(false);
         UIPanels[1].SetActive(true);
     }
+    public void BackToMenuPG()
+    {
+        UIPanels[1].SetActive(false);
+        UIPanels[0].SetActive(true);
+    }
 
     public void sDebug()
     {
