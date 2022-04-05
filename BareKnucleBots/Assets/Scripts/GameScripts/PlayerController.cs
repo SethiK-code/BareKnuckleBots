@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         if (move != Vector3.zero)
         {
-            //gameObject.transform.forward = move;
+            gameObject.transform.right = move;
         }
 
         

@@ -33,6 +33,30 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Heavy(Top)"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8eeea45-6798-484b-ad27-bfa7de0012fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""KickBottom"",
+                    ""type"": ""Button"",
+                    ""id"": ""7b9ca360-3a49-4c81-84b1-4f8f391b2640"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Special"",
+                    ""type"": ""Button"",
+                    ""id"": ""2cbfe8eb-926e-4c7b-953c-135114143bcc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -123,6 +147,61 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Light"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4afbfd04-4a3d-476b-b80f-8f2ecde5df98"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Heavy(Top)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ef04858-ef47-46c2-b62e-769ed6927190"",
+                    ""path"": ""<Keyboard>/numpad8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Heavy(Top)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f24673b-b286-4406-bab5-997ab146bbb7"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""KickBottom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e559abc-db9c-40a5-a3e8-dc0a7a6937a5"",
+                    ""path"": ""<Keyboard>/numpad0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""KickBottom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e7526a39-16fc-4701-b67a-8ba2eaaef76f"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Special"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -144,6 +223,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Light = m_Player.FindAction("Light", throwIfNotFound: true);
+        m_Player_HeavyTop = m_Player.FindAction("Heavy(Top)", throwIfNotFound: true);
+        m_Player_KickBottom = m_Player.FindAction("KickBottom", throwIfNotFound: true);
+        m_Player_Special = m_Player.FindAction("Special", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -195,12 +277,18 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Light;
+    private readonly InputAction m_Player_HeavyTop;
+    private readonly InputAction m_Player_KickBottom;
+    private readonly InputAction m_Player_Special;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Light => m_Wrapper.m_Player_Light;
+        public InputAction @HeavyTop => m_Wrapper.m_Player_HeavyTop;
+        public InputAction @KickBottom => m_Wrapper.m_Player_KickBottom;
+        public InputAction @Special => m_Wrapper.m_Player_Special;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -216,6 +304,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Light.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLight;
                 @Light.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLight;
                 @Light.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLight;
+                @HeavyTop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyTop;
+                @HeavyTop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyTop;
+                @HeavyTop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyTop;
+                @KickBottom.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKickBottom;
+                @KickBottom.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKickBottom;
+                @KickBottom.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnKickBottom;
+                @Special.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecial;
+                @Special.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecial;
+                @Special.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSpecial;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -226,6 +323,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Light.started += instance.OnLight;
                 @Light.performed += instance.OnLight;
                 @Light.canceled += instance.OnLight;
+                @HeavyTop.started += instance.OnHeavyTop;
+                @HeavyTop.performed += instance.OnHeavyTop;
+                @HeavyTop.canceled += instance.OnHeavyTop;
+                @KickBottom.started += instance.OnKickBottom;
+                @KickBottom.performed += instance.OnKickBottom;
+                @KickBottom.canceled += instance.OnKickBottom;
+                @Special.started += instance.OnSpecial;
+                @Special.performed += instance.OnSpecial;
+                @Special.canceled += instance.OnSpecial;
             }
         }
     }
@@ -252,5 +358,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnLight(InputAction.CallbackContext context);
+        void OnHeavyTop(InputAction.CallbackContext context);
+        void OnKickBottom(InputAction.CallbackContext context);
+        void OnSpecial(InputAction.CallbackContext context);
     }
 }
