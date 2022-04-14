@@ -12,48 +12,81 @@ public class GameManager : MonoBehaviour
 
     //Player One
     [Header("Player One Settings")]
-    private float p1Health;
+    private PlayerHealth p1HealthScript;
+    private float p1maxHealthValue;
+    private float p1currentHealthValue;
     public Slider p1Slider;
 
     //PlayerTwo
     [Header("Player Two Settings")]
-    private float p2Health;
+    private PlayerHealth p2HealthScript;
+    private float p2maxHealthValue;
+    private float p2currentHealthValue;
     public Slider p2Slider;
 
 
-    void Start()
+    public void Start()
     {
+        GetBothPlayersHealthFromScript();//1)
 
+        SetPlayersHealth();//2)
+
+        SetSlidersToMaxValue();//3)
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         //PlayerOne
-        PlayerOneHealthUpDate();
+        PlayerOneHealthSlider();
 
         //PlayerTwo
-        PlayerTwoHealthUpDate();
+        PlayerTwoHealthSlider();
     }
 
-    public void PlayerOneHealthUpDate()
-    {
-        p1Health = GameObject.FindWithTag("PlayerOneHealth").GetComponent<PlayerHealth>().health;
-        p1Slider.value = p1Health;
+    public void PlayerOneHealthSlider()
+    {        
+        
+            p1currentHealthValue = p1HealthScript.currentHealth;
+            p1Slider.value = p1currentHealthValue;
 
-        if (p1Health <= 0)
-        {
-            Debug.Log("Player One Loses");
-        }
+            if (p1maxHealthValue <= 0)
+            {
+                Debug.Log("Player One Loses");
+            }
+
+            p1HealthScript.hit = false;
+        
+
+        
     }
-    public void PlayerTwoHealthUpDate()
+    public void PlayerTwoHealthSlider()
     {
-        p2Health = GameObject.FindWithTag("PlayerTwoHealth").GetComponent<PlayerHealth>().health;
-        p2Slider.value = p2Health;
+        
+            p2currentHealthValue = p2HealthScript.currentHealth;
+            p2Slider.value = p2currentHealthValue;
 
-        if (p2Health <= 0)
-        {
+            if (p2currentHealthValue <= 0)
+            {
             Debug.Log("Player Two Loses");
-        }
+            }
+            p2HealthScript.hit = false;
+        
+    }
+
+    public void GetBothPlayersHealthFromScript()
+    {
+        p1HealthScript = GameObject.FindWithTag("PlayerOneHealth").GetComponent<PlayerHealth>();
+        p2HealthScript = GameObject.FindWithTag("PlayerTwoHealth").GetComponent<PlayerHealth>();
+    }
+    public void SetPlayersHealth()
+    {
+        p1maxHealthValue = p1HealthScript.maxHealth;
+        p2maxHealthValue = p2HealthScript.maxHealth;
+    }
+    public void SetSlidersToMaxValue()
+    {
+        p1Slider.value = p1maxHealthValue;
+        p2Slider.value = p2maxHealthValue;
     }
 }

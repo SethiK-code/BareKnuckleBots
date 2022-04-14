@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float health;
+    public float maxHealth;
+    public float currentHealth;
+    public bool hit;
+
+    public void Start()
+    {
+        currentHealth = maxHealth;
+    }
 
     public void TakeDamage(float amount)
     {
-        health -= amount;
-        if (health <= 0f)
+        
+        currentHealth -= amount;
+        if (currentHealth <= 0f)
         {
             Die();
         }

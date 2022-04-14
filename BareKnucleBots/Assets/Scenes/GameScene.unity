@@ -439,9 +439,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 1000
   m_WholeNumbers: 1
-  m_Value: 100
+  m_Value: 1000
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -557,7 +557,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 493535142}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -1137,7 +1137,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 764965221}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -2065,6 +2065,7 @@ GameObject:
   - component: {fileID: 1149244809}
   - component: {fileID: 1149244811}
   - component: {fileID: 1149244810}
+  - component: {fileID: 1149244813}
   m_Layer: 0
   m_Name: Body
   m_TagString: PlayerOneHealth
@@ -2162,7 +2163,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662b4b0684d6c1b4d96ee50cf710e317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  maxHealth: 1000
+  currentHealth: 0
+  hit: 0
+--- !u!54 &1149244813
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1149244807}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1174368230
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,6 +2270,7 @@ GameObject:
   - component: {fileID: 1348064383}
   - component: {fileID: 1348064385}
   - component: {fileID: 1348064384}
+  - component: {fileID: 1348064387}
   m_Layer: 0
   m_Name: Body
   m_TagString: PlayerTwoHealth
@@ -2348,7 +2368,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662b4b0684d6c1b4d96ee50cf710e317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  maxHealth: 1000
+  currentHealth: 0
+  hit: 0
+--- !u!54 &1348064387
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1348064381}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &1395553496
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,9 +2585,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 1000
   m_WholeNumbers: 1
-  m_Value: 100
+  m_Value: 1000
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2799,7 +2837,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1617230610}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

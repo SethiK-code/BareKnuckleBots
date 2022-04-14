@@ -11,14 +11,16 @@ public class DamageField : MonoBehaviour
     {
         damage = GetComponentInParent<PlayerCombat>().currentAttack.attackDamage;
     }
-    public void OnTriggerEnter(Collider collider)
+    public void OnCollisionEnter(Collision collision)
     {
-        PlayerHealth player = collider.GetComponent<PlayerHealth>();
-        Debug.Log(collider.name);
+        PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+        //Debug.Log(collision.gameObject.name);
 
         if (player != null)
         {
             player.TakeDamage(damage);
         }
     }
+
+    
 }
